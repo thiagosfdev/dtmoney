@@ -5,6 +5,7 @@ import { GlobalStyle } from "./styles/global";
 import { Header } from "./components/Header";
 import { Dashboard } from "./components/Dashboard";
 import { NewTransactionModal } from './components/NewTransactionModal';
+import { TransactionsProvider } from './hooks/useTransactions';
 
 export function App() {
 
@@ -20,14 +21,16 @@ export function App() {
 
   return (
     <>
-      <GlobalStyle />
-      <Header onOpenNewTransactionModal={handleOpenNewTransactionModal} />
-      <Dashboard />
+      <TransactionsProvider>
+        <GlobalStyle />
+        <Header onOpenNewTransactionModal={handleOpenNewTransactionModal} />
+        <Dashboard />
 
-      <NewTransactionModal
-        isOpen={isNewTransactionaModalOpen}
-        onRequestClose={handleCloseNewTransactionModal}
-      />
+        <NewTransactionModal
+          isOpen={isNewTransactionaModalOpen}
+          onRequestClose={handleCloseNewTransactionModal}
+        />
+      </TransactionsProvider>
     </>
   );
 }
